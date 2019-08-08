@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>The Jam Session Tracker</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'musicsessions/style.css' %}"> -->
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</head>
+
+<body>
+<div class="jumbotron text-center" style ="margin-bottom:0; background-color: lightgrey">
+    <h1>Home Page</h1>
+</div>
+
+<section class="container" style="padding:30px">
+    <p>Welcome to the home page!</p>
+
+    <a href="{% url 'sessions:index' %}">View all available sessions</a>
+</section>
+
+<footer class="jumbotron text-center" style="margin-bottom:0; padding:20px">
+    <h6>Stephen Chin</h6>
+</footer>
+</body>
+</html>
