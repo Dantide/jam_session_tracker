@@ -4,6 +4,7 @@ from . import views
 
 app_name = 'sessions'
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
+    path('', views.SessionIndexView.as_view(), name='session_index'),
     path('<int:pk>/', views.SessionDetailView.as_view(), name='detail'),
+    path('tunelist/', views.TuneListView.as_view(), name="tune_list"),
 ]

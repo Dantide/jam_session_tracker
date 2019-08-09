@@ -5,8 +5,8 @@ from django.views import generic
 from .models import Session, Tune
 
 # Create your views here.
-class IndexView(generic.ListView):
-    template_name = 'musicsessions/index.html'
+class SessionIndexView(generic.ListView):
+    template_name = 'musicsessions/session_index.html'
     context_object_name = 'session_list'
 
     def get_queryset(self):
@@ -25,8 +25,8 @@ class SessionDetailView(generic.DetailView):
         return Session.objects.all()
 
 class TuneListView(generic.ListView):
-    model = Tune
-    template_name = ""
+    template_name = 'musicsessions/tune_list.html'
+    context_object_name = 'tune_list'
 
     def get_queryset(self):
         return Tune.objects.all().order_by('name')

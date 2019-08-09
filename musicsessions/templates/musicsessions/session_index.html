@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Jam Session Index</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</head>
+
+<body>
+    <header>
+        <div class="jumbotron text-center" style="background-color: lightgrey; margin-bottom:0;">
+            <h1>Session List</h1>
+            <p>VIew all sessions available in the App.</p>
+        </div>
+
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <span class="navbar-brand mb-0 h1">Navbar</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'sessions:session_index' %}">Available Sessions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'sessions:tune_list' %}">Tune List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Search</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="container" style="padding: 30px">
+            <h1>All available sessions:</h1>
+
+            {% if session_list %}
+                <table class="table table-sm table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Start Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for musicsession in session_list %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td><a href="{% url 'sessions:detail' musicsession.pk %}">{{ musicsession.session_title }}</a></td>
+                            <td>{{ musicsession.start_date }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>There are no sessions available.</p>
+            {% endif %}
+
+            <a href="{% url 'home' %}">Go Back</a>
+        </section>
+    </main>
+
+    <footer class="jumbotron text-center" style="margin-bottom:0; padding:20px">
+        <h6>Stephen Chin</h6>
+    </footer>
+</body>
+</html>

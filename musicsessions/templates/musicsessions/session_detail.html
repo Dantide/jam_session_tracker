@@ -7,32 +7,49 @@
 </head>
 
 <body>
+    <header>
+        <div class="jumbotron text-center" style="margin-bottom:0; background-color:lightgrey">
+            <h1>Session Details</h1>
+            <p>View the tunes played in your session.</p>
+        </div>
 
-<header class="jumbotron text-center" style="margin-bottom:0; background-color:lightgrey">
-    <h1>Session Details</h1>
-    <p>View the tunes played in your session.</p>
-</header>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <span class="navbar-brand h1">Navbar</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span></span>
+            </button>
+            <div>
+                <ul>
+                    <li>
+                        <a></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
-<section class="container" style="padding:30px">
-    <h1>{{ session.session_title }}</h1>
+    <main>
+        <section class="container" style="padding:30px">
+            <h1>{{ session.session_title }}</h1>
 
-    {% if error_message %} <p><strong>{{ error_message }}</strong></p>{% endif %}
+            {% if error_message %} <p><strong>{{ error_message }}</strong></p>{% endif %}
 
-    <p>Tune List:</p>
+            <p>Tune List:</p>
+            
+            {% if session.sessiontune_set.all %}
+                <ul>
+                {% for sessiontune in session.sessiontune_set.all %}
+                    <li>{{ sessiontune.tune.name }}: Played as a {{ sessiontune.tempo }} {{ sessiontune.style }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
 
-    {% if session.sessiontune_set.all %}
-        <ul>
-        {% for sessiontune in session.sessiontune_set.all %}
-            <li>{{ sessiontune.tune.name }}: Played as a {{ sessiontune.tempo }} {{ sessiontune.style }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
+            <a href="{% url 'sessions:session_index' %}">Go Back</a>
+        </section>
+    </main>
 
-    <a href="{% url 'sessions:index' %}">Go Back</a>
-</section>
-
-<footer class="jumbotron text-center" style="margin-bottom:0; background-color:lightgrey; padding:20px">
-    <h6>Stephen Chin</h6>
-</footer>
+    <footer class="jumbotron text-center" style="margin-bottom:0; padding:20px">
+        <h6>Stephen Chin</h6>
+    </footer>
 </body>
 </html>
