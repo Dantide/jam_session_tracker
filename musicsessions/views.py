@@ -31,5 +31,15 @@ class TuneListView(generic.ListView):
     def get_queryset(self):
         return Tune.objects.all().order_by('name')
 
+class AddTuneToSessionView(generic.ListView):
+    template_name = ''
+    context_object_name = 'tune_list'
+
+    def get_queryset(self):
+        return Tune.objects.all().order_by('name')
+
 def index(request):
     return HttpResponse("This is the session index.")
+
+def add_tune_to_session(request):
+    pass
