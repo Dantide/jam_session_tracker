@@ -2,6 +2,9 @@ from django.contrib import admin
 
 from .models import Tune, Session, Style, Tempo, RealBook, Tag, SessionTune, TuneRealBook
 
+# username: admin
+# password: BassHEad2.0
+
 # Register your models here.
 class SessionTuneInline(admin.TabularInline):
     model = SessionTune

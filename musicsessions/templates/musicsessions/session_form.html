@@ -3,12 +3,14 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
-    
     <script src="{% static 'jquery/jquery-3.4.1.js' %}"></script>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <title>New Jam Session</title>
 </head>
 
 <body>
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
         <span class="navbar-brand mb-0 h1">Navbar</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -20,7 +22,7 @@
                     <a class="nav-link" href="{% url 'home' %}">Home Page</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'sessions:session_index' %}">Available Sessions</a>
+                    <a class="nav-link" href="{% url 'sessions:session_index' %}">Available Sessions</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'sessions:tune_list' %}">Tune List</a>
@@ -31,49 +33,25 @@
             </ul>
         </div>
     </nav>
+    <!-- /Navbar -->
 
     <header>
-        <div class="jumbotron text-center" style="margin-bottom:0; background-color:lightgrey">
-            <h1>Session Details</h1>
-            <p>View the tunes played in your session.</p>
+        <div class="jumbotron text-center" style="background-color: lightgrey; margin-bottom:0;">
+            <h1>New Session</h1>
+            <p>Create a new Session.</p>
         </div>
     </header>
 
     <main>
-        <section class="container" style="padding:30px">
-            <h1>{{ session.session_title }}</h1>
-
-            {% if error_message %} <p><strong>{{ error_message }}</strong></p>{% endif %}
-
-            <p>Tune List:</p>
-            
-            {% if session.sessiontune_set.all %}
-            <table class="table table-sm table-hover">
-                <thead>
-                    <th scope="col">#</th>
-                    <th scope="col">Tune</th>
-                    <th scope="col">Style</th>
-                    <th scope="col">Tempo</th>
-                </thead>
-                <tbody>
-                {% for sessiontune in session.sessiontune_set.all %}
-                <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td><a href="#">{{ sessiontune.tune.name }}</a></td>
-                    <td>{{ sessiontune.style }}</td>
-                    <td>{{ sessiontune.tempo }}</td>
-                </tr>
-                {% endfor %}
-                </tbody>
+        <form action="." method="POST">{% csrf_token %}
+            <table>
+                {{ form.as_table }}
             </table>
-            {% endif %}
-
-            <a href="{% url 'sessions:session_index' %}">Go Back</a>
-        </section>
+            <input type="submit" value="Save">
+        </form>
     </main>
 
     <footer class="jumbotron text-center" style="margin-bottom:0; padding:20px">
         <h6>Stephen Chin</h6>
     </footer>
 </body>
-</html>

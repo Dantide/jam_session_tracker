@@ -42,7 +42,7 @@ def import_song_list(filename : str) -> None:
                 failed_count += 1
                 message = "Failed: " + row[0] + " is already in the database." + ("Real Book entry added." if tunerealbook_created else "")
                 if (not tunerealbook_created):
-                    message = message + 
+                    message = message + "" # TODO what was here?
             else:
                 import_count += 1
                 message = "Passed: " + row[0] + "."

@@ -4,6 +4,14 @@ from django.views import generic
 
 from .models import Session, Tune
 
+#=======================================================
+# Forms
+#=======================================================
+
+#=======================================================
+# Views
+#=======================================================
+
 # Create your views here.
 class SessionIndexView(generic.ListView):
     template_name = 'musicsessions/session_index.html'
@@ -31,12 +39,25 @@ class TuneListView(generic.ListView):
     def get_queryset(self):
         return Tune.objects.all().order_by('name')
 
-class AddTuneToSessionView(generic.ListView):
+class AddTuneToSessionView(generic.UpdateView):
     template_name = ''
     context_object_name = 'tune_list'
 
     def get_queryset(self):
         return Tune.objects.all().order_by('name')
+
+class NewSessionView(generic.CreateView):
+    model = Session
+    fields = ['session_title', 'session_type', 'start_date']
+    template_name = 'musicsessions/session_form.html'
+    success_url = 'sessions:session_list'
+
+#=======================================================
+# Other Functions
+#=======================================================
+
+def makesession(request):
+    pass
 
 def index(request):
     return HttpResponse("This is the session index.")

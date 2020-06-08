@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
         <span class="navbar-brand mb-0 h1">Navbar</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -32,6 +33,7 @@
             </ul>
         </div>
     </nav>
+    <!-- /Navbar -->
 
     <header>
         <div class="jumbotron text-center" style="background-color: lightgrey; margin-bottom:0;">
@@ -44,7 +46,7 @@
         <section class="container" style="padding: 30px">
             <h1>All available sessions:</h1>
 
-            <a class="btn btn-dark" style="color: white" role="button">Create a new session</a><br>
+            <a href="{% url 'sessions:new_session' %}" class="btn btn-dark" style="color: white" role="button">Create a new session</a><br>
 
             {% if session_list %}
                 <table class="table table-sm table-hover">
