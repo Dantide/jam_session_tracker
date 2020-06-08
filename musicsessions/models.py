@@ -67,6 +67,8 @@ class Session(models.Model):
         (PRACTICE, 'Practice'),
         (JAM, 'Jam'),
     ]
+    
+    #Fields
     session_title = models.CharField(max_length=200)
     start_date = models.DateTimeField('date of session start')
     session_type = models.CharField(

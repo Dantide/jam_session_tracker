@@ -1,12 +1,24 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.forms import ModelForm
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 
 from .models import Session, Tune
 
+import datetime
+
 #=======================================================
 # Forms
 #=======================================================
+
+class SessionCreateForm(ModelForm):
+    class Meta:
+        model = Session
+        exclude = ('start_date','tunes')
+    
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('start_date')
+        super(SessionCreateForm, self).__init__(*args, **kwargs)
 
 #=======================================================
 # Views
@@ -47,10 +59,20 @@ class AddTuneToSessionView(generic.UpdateView):
         return Tune.objects.all().order_by('name')
 
 class NewSessionView(generic.CreateView):
-    model = Session
-    fields = ['session_title', 'session_type', 'start_date']
+    form_class = SessionCreateForm
     template_name = 'musicsessions/session_form.html'
-    success_url = 'sessions:session_list'
+    success_url = 'sessions:session_index'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.start_date = datetime.datetime.now()
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_form_kwargs(self, *args, **kwargs):
+        kwargs = super(NewSessionView, self).get_form_kwargs(*args, **kwargs)
+        kwargs['start_date'] = datetime.datetime.now()
+        return kwargs
 
 #=======================================================
 # Other Functions
