@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.forms import ModelForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
+from django.urls import reverse
 
 from .models import Session, Tune
 
@@ -67,7 +68,7 @@ class NewSessionView(generic.CreateView):
         self.object = form.save(commit=False)
         self.object.start_date = datetime.datetime.now()
         self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
+        return HttpResponseRedirect(reverse(self.get_success_url()))
 
     def get_form_kwargs(self, *args, **kwargs):
         kwargs = super(NewSessionView, self).get_form_kwargs(*args, **kwargs)
