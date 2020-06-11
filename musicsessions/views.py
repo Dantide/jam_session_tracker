@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.urls import reverse
 
-from .models import Session, Tune
+from .models import Session, Tune, SessionTune
 
 import datetime
 
@@ -13,6 +13,7 @@ import datetime
 #=======================================================
 
 class SessionCreateForm(ModelForm):
+    # The form for creating a new session.
     class Meta:
         model = Session
         exclude = ('start_date','tunes')
@@ -27,6 +28,7 @@ class SessionCreateForm(ModelForm):
 
 # Create your views here.
 class SessionIndexView(generic.ListView):
+    # The view for all created sessions.
     template_name = 'musicsessions/session_index.html'
     context_object_name = 'session_list'
 
@@ -34,6 +36,7 @@ class SessionIndexView(generic.ListView):
         return Session.objects.all().order_by('-start_date')
 
 class SessionDetailView(generic.DetailView):
+    # The view for showing details for a specific Jam Session.
     model = Session
     template_name = 'musicsessions/session_detail.html'
 
@@ -46,6 +49,7 @@ class SessionDetailView(generic.DetailView):
         return Session.objects.all()
 
 class TuneListView(generic.ListView):
+    # The view for showing all available tunes within the software
     template_name = 'musicsessions/tune_list.html'
     context_object_name = 'tune_list'
 
@@ -53,13 +57,19 @@ class TuneListView(generic.ListView):
         return Tune.objects.all().order_by('name')
 
 class AddTuneToSessionView(generic.UpdateView):
-    template_name = ''
+    # The view for adding a tune to an active session
+    # TODO: Finish
+    model = SessionTune
+    fields = ['tune']
+    template_name = 'musicsessions/sessiontune_update.html'
     context_object_name = 'tune_list'
+    success_url = ''
 
     def get_queryset(self):
         return Tune.objects.all().order_by('name')
 
 class NewSessionView(generic.CreateView):
+    # The view for creating a new session
     form_class = SessionCreateForm
     template_name = 'musicsessions/session_form.html'
     success_url = 'sessions:session_index'

@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <script src="{% static 'jquery/jquery-3.4.1.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <title>Jam Session Index</title>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <span class="navbar-brand mb-0 h1">Navbar</span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home Page</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'sessions:session_index' %}">Available Sessions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'sessions:tune_list' %}">Tune List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Search</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- /Navbar -->
+
+    <header>
+        <div class="jumbotron text-center" style="background-color: lightgrey; margin-bottom:0;">
+            <h1>Add Tune to Session</h1>
+            <p>Update your session with the next tune.</p>
+        </div>
+    </header>
+
+    <main>
+    </main>
+
+    <footer class="jumbotron text-center" style="margin-bottom:0; padding:20px">
+        <h6>Stephen Chin</h6>
+    </footer>
+</body>
+</html>
