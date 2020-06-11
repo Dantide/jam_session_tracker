@@ -19,10 +19,10 @@
                     <a class="nav-link" href="{% url 'home' %}">Home Page</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'sessions:session_index' %}">Available Sessions</a>
+                    <a class="nav-link" href="{% url 'sessions:session_index' %}">Available Sessions</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'sessions:tune_list' %}">Tune List</a>
+                    <a class="nav-link active" href="{% url 'sessions:tune_list' %}">Tune List</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Search</a>
@@ -40,7 +40,7 @@
     <section class="container" style="padding:30px">
         <h1>Available Tunes:</h1>
         {% if tune_list %}
-            <table class="table table-sm table-hover">
+            <table class="table table-sm table-bordered table-hover">
                 <thead>
                     <tr>
                         <th scope="col">#</th>

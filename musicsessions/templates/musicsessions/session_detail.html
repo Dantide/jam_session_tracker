@@ -20,7 +20,7 @@
                     <a class="nav-link" href="{% url 'home' %}">Home Page</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'sessions:session_index' %}">Available Sessions</a>
+                    <a class="nav-link" href="{% url 'sessions:session_index' %}">Available Sessions</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'sessions:tune_list' %}">Tune List</a>
@@ -41,14 +41,18 @@
 
     <main>
         <section class="container" style="padding:30px">
-            <h1>{{ session.session_title }}</h1>
+            <h1>Name: {{ session.session_title }}</h1>
+            <h2>Date: {{ session.start_date }}</h2>
+
+            <a class="btn btn-dark" href="#" style="color: white;" role="button">Add a new tune</a>
+
+            <p></p>
 
             {% if error_message %} <p><strong>{{ error_message }}</strong></p>{% endif %}
 
             <p>Tune List:</p>
             
-            {% if session.sessiontune_set.all %}
-            <table class="table table-sm table-hover">
+            <table class="table table-sm table-striped table-bordered table-hover">
                 <thead>
                     <th scope="col">#</th>
                     <th scope="col">Tune</th>
@@ -56,6 +60,7 @@
                     <th scope="col">Tempo</th>
                 </thead>
                 <tbody>
+                {% if session.sessiontune_set.all %}
                 {% for sessiontune in session.sessiontune_set.all %}
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
@@ -64,9 +69,14 @@
                     <td>{{ sessiontune.tempo }}</td>
                 </tr>
                 {% endfor %}
+                {% else %}
+                <tr>
+                    <th scope="row">1</th>
+                    <td colspan="3" style="text-align: center;">No tunes have been added yet.</td>
+                </tr>
+                {% endif %}
                 </tbody>
             </table>
-            {% endif %}
 
             <a href="{% url 'sessions:session_index' %}">Go Back</a>
         </section>

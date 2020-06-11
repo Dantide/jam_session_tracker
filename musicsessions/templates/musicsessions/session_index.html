@@ -49,10 +49,10 @@
             <a href="{% url 'sessions:new_session' %}" class="btn btn-dark" style="color: white" role="button">Create a new session</a><br>
 
             {% if session_list %}
-                <table class="table table-sm table-hover">
+                <table class="table table-sm table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <!-- <th scope="col">#</th> -->
                             <th scope="col">Name</th>
                             <th scope="col">Start Date</th>
                         </tr>
@@ -60,7 +60,7 @@
                     <tbody>
                     {% for musicsession in session_list %}
                         <tr>
-                            <th scope="row">{{ forloop.counter }}</th>
+                            <!-- <th scope="row">{{ forloop.counter }}</th> -->
                             <td><a href="{% url 'sessions:detail' musicsession.pk %}">{{ musicsession.session_title }}</a></td>
                             <td>{{ musicsession.start_date }}</td>
                         </tr>
